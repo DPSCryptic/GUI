@@ -24,7 +24,6 @@ public:
 	void paint(juce::Graphics&) override;
 	void resized() override;
 
-
 	WerkzoekendeComponent werkzoekendeComponent;
 	BedrijvenComponent bedrijvenComponent;
 	JobsComponent jobsComponent;
@@ -32,8 +31,6 @@ private:
 	//==============================================================================
 	// Your private member variables go here...
 	juce::TabbedComponent tabs{ juce::TabbedButtonBar::Orientation::TabsAtTop };
-
-
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };
