@@ -32,5 +32,12 @@
 *.app
 
 # Folders
+/.vscode/
 /Builds/
 /JuceLibraryCode/
+/source/dsp/
+/source/Gui
+
+# Files
+/source/Fifo.h
+/source/VerticalDiscreteMeter
