@@ -41,7 +41,6 @@ public:
 	WerkzoekendeComponent()
 	{
 		setTitle("Werkzoekende");
-		addAndMakeVisible(editArea);
 		addAndMakeVisible(treeView);
 	}
 
@@ -55,21 +54,18 @@ public:
 		auto treeViewButtonArea = treeViewArea.removeFromBottom(50).reduced(2);
 		auto editViewArea = bounds.removeFromLeft(bounds.getWidth()).reduced(2);
 
-		Grid grid1;
-		Grid grid2;
+		Grid grid;
 
-		grid1.templateRows = { Grid::TrackInfo(Grid::Fr(12)), Grid::TrackInfo(Grid::Fr(1)), Grid::TrackInfo(Grid::Fr(2)) };
-		grid1.templateColumns = { Grid::TrackInfo(Grid::Fr(1)), Grid::TrackInfo(Grid::Fr(1)) };
+		grid.templateRows = { Grid::TrackInfo(Grid::Fr(12)), Grid::TrackInfo(Grid::Fr(1)), Grid::TrackInfo(Grid::Fr(2)) };
+		grid.templateColumns = { Grid::TrackInfo(Grid::Fr(1)), Grid::TrackInfo(Grid::Fr(1)) };
 
-		grid1.items = {//GridItem(editArea).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }),
+		grid.items = {//GridItem(editArea).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }),
 					   //GridItem(buttons).withMargin({ 2 }),
 					   //GridItem(sliders).withMargin({ 2 }),
 					   GridItem(treeView).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }) };
 
-		grid2.items ={ GridItem(editArea).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }),};
 
-		grid1.performLayout(treeViewArea);
-		grid2.performLayout(editViewArea);
+		grid.performLayout(treeViewArea);
 	}
 
 private:
@@ -146,8 +142,6 @@ private:
 	};
 
 	TreeViewComponent treeViewComponent;
-	TreeViewComponent editAreaComponent;
 
 	ContentComponent treeView{ "TreeView", treeViewComponent };
-	ContentComponent editArea{ "EditArea", editAreaComponent };
 };
