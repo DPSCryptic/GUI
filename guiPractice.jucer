@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="EOJKuM" name="guiPractice" projectType="guiapp" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              cppLanguageStandard="20">
+  <MAINGROUP id="rcatpu" name="guiPractice">
+    <GROUP id="{4F0FAC66-A167-8A2E-5DC1-DE3D7ECA12BC}" name="Source">
+      <GROUP id="{CD5AD4CB-67D0-F649-7DF2-F7969CCC801A}" name="Tabs">
+        <GROUP id="{FC3E8B19-48AE-592B-9930-BE673024C01B}" name="Werkzoekende">
+          <FILE id="SseU6i" name="Werkzoekende.cpp" compile="1" resource="0"
+                file="Source/Tabs/Werkzoekende.cpp"/>
+          <FILE id="w6V2hF" name="Werkzoekende.h" compile="0" resource="0" file="Source/Tabs/Werkzoekende.h"/>
+        </GROUP>
+        <GROUP id="{9AC66979-0EC2-588B-FF15-E7BD1B6308D9}" name="Jobs">
+          <FILE id="dPjeeP" name="Jobs.cpp" compile="1" resource="0" file="Source/Tabs/Jobs.cpp"/>
+          <FILE id="X6sKx9" name="Jobs.h" compile="0" resource="0" file="Source/Tabs/Jobs.h"/>
+        </GROUP>
+        <GROUP id="{355D847F-698B-FA8E-D260-1665B6D6019C}" name="Bedrijven">
+          <FILE id="IBxa7b" name="Bedrijven.cpp" compile="1" resource="0" file="Source/Tabs/Bedrijven.cpp"/>
+          <FILE id="Sh2PP0" name="Bedrijven.h" compile="0" resource="0" file="Source/Tabs/Bedrijven.h"/>
+        </GROUP>
+      </GROUP>
+      <FILE id="BHZIdB" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="mAiBm8" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="LkU9LF" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="guiPractice"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="guiPractice"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_analytics" path="../../../../JUCE SDK/modules"/>
+        <MODULEPATH id="juce_box2d" path="../../../../JUCE SDK/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../JUCE SDK/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../../../JUCE SDK/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../JUCE SDK/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../JUCE SDK/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../JUCE SDK/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../JUCE SDK/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../JUCE SDK/modules"/>
+        <MODULEPATH id="juce_opengl" path="../../../../JUCE SDK/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_analytics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_box2d" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+  </MODULES>
+</JUCERPROJECT>
