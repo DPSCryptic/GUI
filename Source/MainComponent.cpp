@@ -1,7 +1,7 @@
 #include "MainComponent.h"
 #include "Tabs/Werkzoekende.h"
 //==============================================================================
-	MainComponent::MainComponent()
+MainComponent::MainComponent()
 	{
 
 		const auto tabColour = getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId).darker(0.1f);
