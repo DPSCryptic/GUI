@@ -42,6 +42,7 @@ public:
 	{
 		setTitle("Werkzoekende");
 		addAndMakeVisible(treeView);
+		addAndMakeVisible(editArea);
 	}
 
 	//void paint(Graphics&) override;
@@ -50,20 +51,12 @@ public:
 		auto bounds = getLocalBounds().reduced(5);
 
 		auto treeViewArea = bounds.removeFromLeft(bounds.getWidth() / 4).reduced(2);
-		auto treeViewButtonArea = treeViewArea.removeFromBottom(50).reduced(2);
+		auto treeViewButtonArea = treeViewArea.removeFromBottom(10).reduced(2);
 		auto editViewArea = bounds.removeFromLeft(bounds.getWidth()).reduced(2);
 
-		Grid grid;
 
-		grid.templateRows = { Grid::TrackInfo(Grid::Fr(12)), Grid::TrackInfo(Grid::Fr(1)), Grid::TrackInfo(Grid::Fr(2)) };
-		grid.templateColumns = { Grid::TrackInfo(Grid::Fr(1)), Grid::TrackInfo(Grid::Fr(1)) };
-
-		grid.items = {//GridItem(editArea).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }),
-					   //GridItem(buttons).withMargin({ 2 }),
-					   //GridItem(sliders).withMargin({ 2 }),
-					   GridItem(treeView).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }) };
-
-		grid.performLayout(treeViewArea);
+		treeView.setBounds(treeViewArea);
+		editArea.setBounds(editViewArea);
 	}
 
 private:
@@ -139,7 +132,80 @@ private:
 		RootItem root;
 	};
 
+	class EditViewComponent : public Component
+	{
+	public:
+		EditViewComponent()
+		{
+			tree.setRootItem(&root);
+			tree.setRootItemVisible(false);
+
+			addAndMakeVisible(tree);
+		}
+
+		void resized() override
+		{
+			tree.setBounds(getLocalBounds());
+		}
+	private:
+		struct RootItem : public TreeViewItem
+		{
+			RootItem()
+			{
+				struct Item : public TreeViewItem
+				{
+					Item(int index, int depth, int numSubItems)
+						: textToDisplay("Item " + String(index)
+							+ ". Depth: " + String(depth)
+							+ ". Num sub-items: " + String(numSubItems))
+					{
+						for (int i = 0; i < numSubItems; ++i)
+							addSubItem(new Item(i,
+								depth + 1,
+								Random::getSystemRandom().nextInt(jmax(0, 5 - depth))));
+					}
+
+					bool mightContainSubItems() override
+					{
+						return getNumSubItems() > 0;
+					}
+
+					void paintItem(Graphics& g, int width, int height) override
+					{
+						if (isSelected())
+						{
+							g.setColour(Colours::yellow.withAlpha(0.3f));
+							g.fillRect(0, 0, width, height);
+						}
+
+						g.setColour(Colours::black);
+						g.drawRect(0, height - 1, width, 1);
+
+						g.setColour(Colours::white);
+						g.drawText(textToDisplay, 0, 0, width, height, Justification::centredLeft);
+					}
+
+					String getAccessibilityName() override { return textToDisplay; }
+
+					const String textToDisplay;
+				};
+
+				for (int i = 0; i < 10; ++i)
+					addSubItem(new Item(i, 0, Random::getSystemRandom().nextInt(10)));
+			}
+
+			bool mightContainSubItems() override
+			{
+				return true;
+			}
+		};
+		TreeView tree;
+		RootItem root;
+	};
+
 	TreeViewComponent treeViewComponent;
+	EditViewComponent editViewComponent;
 
 	ContentComponent treeView{ "TreeView", treeViewComponent };
+	ContentComponent editArea{ "EditArea", editViewComponent };
 };
