@@ -6,11 +6,9 @@ using namespace juce;
 class ContentComponent : public Component
 {
 public:
-	ContentComponent(const String& title, Component& contentToDisplay)
-		: titleLabel({}, title), content(contentToDisplay)
+	ContentComponent(Component& contentToDisplay)
+		:  content(contentToDisplay)
 	{
-		addAndMakeVisible(titleLabel);
-		setTitle(title);
 		addAndMakeVisible(content);
 	}
 
@@ -24,8 +22,8 @@ public:
 	{
 		auto bounds = getLocalBounds().reduced(5);
 
-		auto topArea = bounds.removeFromTop(30);
-		titleLabel.setBounds(topArea.reduced(5));
+		//auto topArea = bounds.removeFromTop(30);
+		//titleLabel.setBounds(topArea.reduced(5));
 
 		content.setBounds(bounds);
 	}
@@ -43,6 +41,8 @@ public:
 		setTitle("Werkzoekende");
 		addAndMakeVisible(treeView);
 		addAndMakeVisible(editArea);
+		addAndMakeVisible(buttonArea1);
+		addAndMakeVisible(buttonArea2);
 	}
 
 	//void paint(Graphics&) override;
@@ -51,12 +51,16 @@ public:
 		auto bounds = getLocalBounds().reduced(5);
 
 		auto treeViewArea = bounds.removeFromLeft(bounds.getWidth() / 4).reduced(2);
-		auto treeViewButtonArea = treeViewArea.removeFromBottom(10).reduced(2);
+		auto treeViewButtonArea = treeViewArea.removeFromBottom(100).reduced(2);
+		auto addButton = treeViewButtonArea.removeFromLeft(treeViewButtonArea.getWidth() / 2);
+		auto deleteButton = treeViewButtonArea.removeFromLeft(treeViewButtonArea.getWidth());
 		auto editViewArea = bounds.removeFromLeft(bounds.getWidth()).reduced(2);
 
 
 		treeView.setBounds(treeViewArea);
 		editArea.setBounds(editViewArea);
+		buttonArea1.setBounds(addButton);
+		buttonArea2.setBounds(deleteButton);
 	}
 
 private:
@@ -203,9 +207,53 @@ private:
 		RootItem root;
 	};
 
+	class AddButtonViewComponent : public Component
+	{
+	public:
+		AddButtonViewComponent()
+		{
+			textButton1.setHasFocusOutline(true);
+			addAndMakeVisible(textButton1);
+		}
+
+		void resized() override
+		{
+			auto bounds1 = getLocalBounds().removeFromLeft(getLocalBounds().getWidth());
+			auto bounds2 = bounds1.removeFromLeft(bounds1.getWidth());
+
+			textButton1.setBounds(bounds2);
+		}
+	private:
+		TextButton textButton1{ "Add" };
+	};
+
+	class DeleteButtonViewComponent : public Component
+	{
+	public:
+		DeleteButtonViewComponent()
+		{
+			textButton1.setHasFocusOutline(true);
+			addAndMakeVisible(textButton1);
+		}
+
+		void resized() override
+		{
+			auto bounds1 = getLocalBounds().removeFromLeft(getLocalBounds().getWidth());
+			auto bounds2 = bounds1.removeFromLeft(bounds1.getWidth());
+
+			textButton1.setBounds(bounds2);
+		}
+	private:
+		TextButton textButton1{ "Delete" };
+	};
+
 	TreeViewComponent treeViewComponent;
 	EditViewComponent editViewComponent;
+	AddButtonViewComponent addButtonViewComponent;
+	DeleteButtonViewComponent deleteButtonViewComponent;
 
-	ContentComponent treeView{ "TreeView", treeViewComponent };
-	ContentComponent editArea{ "EditArea", editViewComponent };
+	ContentComponent treeView{ treeViewComponent };
+	ContentComponent editArea{ editViewComponent };
+	ContentComponent buttonArea1{ addButtonViewComponent };
+	ContentComponent buttonArea2{ deleteButtonViewComponent };
 };
