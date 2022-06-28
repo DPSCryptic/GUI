@@ -14,6 +14,22 @@ public:
 		addAndMakeVisible(content);
 	}
 
+	void paint(Graphics& g) override
+	{
+		g.setColour(Colours::black);
+		g.drawRoundedRectangle(getLocalBounds().reduced(2).toFloat(), 5.0f, 3.0f);
+	}
+
+	void resized() override
+	{
+		auto bounds = getLocalBounds().reduced(5);
+
+		auto topArea = bounds.removeFromTop(30);
+		titleLabel.setBounds(topArea.reduced(5));
+
+		content.setBounds(bounds);
+	}
+
 private:
 	Label titleLabel;
 	Component& content;
@@ -24,11 +40,37 @@ class WerkzoekendeComponent : public Component
 public:
 	WerkzoekendeComponent()
 	{
+		setTitle("Werkzoekende");
+		addAndMakeVisible(editArea);
 		addAndMakeVisible(treeView);
 	}
 
 	//void paint(Graphics&) override;
-	void resized() override;
+	void resized() override
+	{
+
+		auto bounds = getLocalBounds().reduced(5);
+		
+		auto treeViewArea = bounds.removeFromLeft(bounds.getWidth() / 4).reduced(2);
+		auto treeViewButtonArea = treeViewArea.removeFromBottom(50).reduced(2);
+		auto editViewArea = bounds.removeFromLeft(bounds.getWidth()).reduced(2);
+
+		Grid grid1;
+		Grid grid2;
+
+		grid1.templateRows = { Grid::TrackInfo(Grid::Fr(12)), Grid::TrackInfo(Grid::Fr(1)), Grid::TrackInfo(Grid::Fr(2)) };
+		grid1.templateColumns = { Grid::TrackInfo(Grid::Fr(1)), Grid::TrackInfo(Grid::Fr(1)) };
+
+		grid1.items = {//GridItem(editArea).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }),
+					   //GridItem(buttons).withMargin({ 2 }),
+					   //GridItem(sliders).withMargin({ 2 }),
+					   GridItem(treeView).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }) };
+
+		grid2.items ={ GridItem(editArea).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }),};
+
+		grid1.performLayout(treeViewArea);
+		grid2.performLayout(editViewArea);
+	}
 
 private:
 
@@ -104,5 +146,8 @@ private:
 	};
 
 	TreeViewComponent treeViewComponent;
+	TreeViewComponent editAreaComponent;
+
 	ContentComponent treeView{ "TreeView", treeViewComponent };
+	ContentComponent editArea{ "EditArea", editAreaComponent };
 };

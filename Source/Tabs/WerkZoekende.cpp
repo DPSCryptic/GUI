@@ -22,6 +22,6 @@ using namespace juce;
 //	g.drawText("Button Area", treeViewButtonArea, juce::Justification::centred, true);
 //}
 
-void WerkzoekendeComponent::resized()
-{
-}
+//void WerkzoekendeComponent::resized()
+//{
+//}
