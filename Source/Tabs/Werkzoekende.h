@@ -47,9 +47,8 @@ public:
 	//void paint(Graphics&) override;
 	void resized() override
 	{
-
 		auto bounds = getLocalBounds().reduced(5);
-		
+
 		auto treeViewArea = bounds.removeFromLeft(bounds.getWidth() / 4).reduced(2);
 		auto treeViewButtonArea = treeViewArea.removeFromBottom(50).reduced(2);
 		auto editViewArea = bounds.removeFromLeft(bounds.getWidth()).reduced(2);
@@ -63,7 +62,6 @@ public:
 					   //GridItem(buttons).withMargin({ 2 }),
 					   //GridItem(sliders).withMargin({ 2 }),
 					   GridItem(treeView).withMargin({ 2 }).withColumn({ GridItem::Span(2), {} }) };
-
 
 		grid.performLayout(treeViewArea);
 	}
