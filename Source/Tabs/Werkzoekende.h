@@ -20,6 +20,7 @@ private:
 
 class WerkzoekendeComponent : public Component
 {
+public:
 	WerkzoekendeComponent()
 	{
 
@@ -31,7 +32,9 @@ class WerkzoekendeComponent : public Component
 	void paint(Graphics&) override;
 	void resized() override;
 
+
 private:
+	
 	class TreeViewComponent : public Component
 	{
 	public:
