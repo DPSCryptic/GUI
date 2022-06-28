@@ -1,8 +1,10 @@
 #pragma once
 #include <JuceHeader.h>
 
-class BedrijvenComponent : public juce::Component
+using namespace juce;
+
+class BedrijvenComponent : public Component
 {
-	void paint(juce::Graphics&) override;
+	void paint(Graphics&) override;
 	void resized() override;
 };
